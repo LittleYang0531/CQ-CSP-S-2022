@@ -17,6 +17,8 @@ int main(){
 		cin>>u>>v;
 		mp[u][v]=i;
 		out[u]++,in[v]++;
+	}
+	cin>>q;
 	for(int i=1,t,u,v;i<=q;i++) {
 		cin>>t;
 		if(t==1) {
