@@ -1,0 +1,300 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+	bool zhen,fu,ling;
+	int maxna=0,minna=0x3f3f3f3f,zhi,minnb=0,maxnb=-0x3f3f3f3f;
+}Af[1005][1005],Bf[1005][1005],Ai[100005],Bi[100005];;
+int n,m,p;
+int main()
+{
+	freopen("game.in","r",stdin);
+	freopen("game.out","w",stdout);
+	cin>>n>>m>>p;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>Ai[i].zhi;
+		if(Ai[i].zhi>0)
+		{
+			Ai[i].zhen=1;
+			Ai[i].maxna=Ai[i].zhi;
+			Ai[i].minna=Ai[i].zhi;
+			Af[i][i].zhen=1;
+			Af[i][i].maxna=Ai[i].zhi;
+			Af[i][i].minna=Ai[i].zhi;
+		}
+		else
+		{
+			if(Ai[i].zhi==0)
+			{
+				Ai[i].ling=1;
+				Af[i][i].ling=1;
+			}
+			else
+			{
+				Ai[i].fu=1;
+				Ai[i].maxnb=Ai[i].zhi;
+			    Ai[i].minnb=Ai[i].zhi;
+			    Af[i][i].fu=1;
+				Af[i][i].maxnb=Ai[i].zhi;
+			    Af[i][i].minnb=Ai[i].zhi;
+			}
+		}
+	} 
+    for(int i=1;i<n;i++)
+    {
+    	Af[i][i+1].zhen=Ai[i].zhen||Ai[i+1].zhen;
+    	Af[i][i+1].fu=Ai[i].fu||Ai[i+1].fu;
+    	Af[i][i+1].ling=Ai[i].ling||Ai[i+1].ling;
+    	Af[i][i+1].maxna=max(Ai[i].maxna,Ai[i+1].maxna);
+    	Af[i][i+1].minna=min(Ai[i].minna,Ai[i+1].minna);
+    	Af[i][i+1].maxnb=max(Ai[i].maxnb,Ai[i+1].maxnb);
+    	Af[i][i+1].minnb=min(Ai[i].minnb,Ai[i+1].minnb);
+	}
+	for(int i=2;i<n;i++)
+	{
+		int k=i/2;
+		for(int j=1;j+i<=n;j++)
+		{
+			Af[j][i+j].zhen=Af[j][j+k].zhen||Af[j+k][j+i].zhen;
+    	    Af[j][i+j].fu=Af[j][j+k].fu||Af[j+k][j+i].fu;
+    	    Af[j][i+j].ling=Af[j][j+k].ling||Af[j+k][j+i].ling;
+    	    Af[j][i+j].maxna=max(Af[j][j+k].maxna,Af[j+k][j+i].maxna);
+    	    Af[j][i+j].minna=min(Af[j][j+k].minna,Af[j+k][j+i].minna);
+    	    Af[j][i+j].maxnb=max(Af[j][j+k].maxnb,Af[j+k][j+i].maxnb);
+    	    Af[j][i+j].minnb=min(Af[j][j+k].minnb,Af[j+k][j+i].minnb);
+		}
+	}
+	
+	
+	
+	
+	
+	for(int i=1;i<=m;i++)
+	{
+		cin>>Bi[i].zhi;
+		if(Bi[i].zhi>0)
+		{
+			Bi[i].zhen=1;
+			Bi[i].maxna=Bi[i].zhi;
+			Bi[i].minna=Bi[i].zhi;
+			Bf[i][i].zhen=1;
+			Bf[i][i].maxna=Bi[i].zhi;
+			Bf[i][i].minna=Bi[i].zhi;
+		}
+		else
+		{
+			if(Bi[i].zhi==0)
+			{
+				Bi[i].ling=1;
+				Bf[i][i].ling=1;
+			}
+			else
+			{
+				Bi[i].fu=1;
+				Bi[i].maxnb=Bi[i].zhi;
+			    Bi[i].minnb=Bi[i].zhi;
+			    Bf[i][i].fu=1;
+				Bf[i][i].maxnb=Bi[i].zhi;
+			    Bf[i][i].minnb=Bi[i].zhi;
+			}
+		}
+	} 
+    for(int i=1;i<m;i++)
+    {
+    	Bf[i][i+1].zhen=Bi[i].zhen||Bi[i+1].zhen;
+    	Bf[i][i+1].fu=Bi[i].fu||Bi[i+1].fu;
+    	Bf[i][i+1].ling=Bi[i].ling||Bi[i+1].ling;
+    	Bf[i][i+1].maxna=max(Bi[i].maxna,Bi[i+1].maxna);
+    	Bf[i][i+1].minna=min(Bi[i].minna,Bi[i+1].minna);
+    	Bf[i][i+1].maxnb=max(Bi[i].maxnb,Bi[i+1].maxnb);
+    	Bf[i][i+1].minnb=min(Bi[i].minnb,Bi[i+1].minnb);
+	}
+	for(int i=2;i<m;i++)
+	{
+		int k=i/2;
+		for(int j=1;j+i<=m;j++)
+		{
+			Bf[j][i+j].zhen=Bf[j][j+k].zhen||Bf[j+k][j+i].zhen;
+    	    Bf[j][i+j].fu=Bf[j][j+k].fu||Bf[j+k][j+i].fu;
+    	    Bf[j][i+j].ling=Bf[j][j+k].ling||Bf[j+k][j+i].ling;
+    	    Bf[j][i+j].maxna=max(Bf[j][j+k].maxna,Bf[j+k][j+i].maxna);
+    	    Bf[j][i+j].minna=min(Bf[j][j+k].minna,Bf[j+k][j+i].minna);
+    	    Bf[j][i+j].maxnb=max(Bf[j][j+k].maxnb,Bf[j+k][j+i].maxnb);
+    	    Bf[j][i+j].minnb=min(Bf[j][j+k].minnb,Bf[j+k][j+i].minnb);
+		}
+	}
+	
+	
+	
+	
+	
+	for(int idj=1;idj<=p;idj++)
+	{
+		int l1,j1,l2,j2;
+		cin>>l1>>j1>>l2>>j2;
+		if(Bf[l2][j2].zhen)
+		{
+			if(Bf[l2][j2].ling)
+			{
+				if(Bf[l2][j2].fu)
+				{
+					if(Af[l1][j1].ling)
+					{
+						cout<<"0"<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].zhen)
+						{
+							if(Af[l1][j1].fu)
+							{
+								cout<<max(Af[l1][j1].minna*Bf[l2][j2].minnb,Af[l1][j1].maxnb*Bf[l2][j2].maxna)<<endl;
+								continue;
+							}
+							else
+							{
+								cout<<Af[l1][j1].minna*Bf[l2][j2].minnb<<endl;
+								continue;
+							}
+						}
+						else
+						{
+							cout<<Af[l1][j1].minna*Bf[l2][j2].minnb<<endl;
+							continue;
+						}
+					}
+				}
+				else
+				{
+					if(Af[l1][j1].zhen)
+					{
+						cout<<"0"<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].ling)
+						{
+							cout<<"0"<<endl;
+							continue;
+						}
+						else
+						{
+							cout<<Af[l1][j1].maxnb*Bf[l1][j2].maxna<<endl;
+							continue;
+						}
+					}
+				}
+			}
+			else
+			{
+				if(Bf[l2][j2].fu)
+				{
+					if(Af[l1][j1].ling)
+					{
+						cout<<"0"<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].zhen)
+						{
+							if(Af[l1][j1].fu)
+							{
+								cout<<max(Af[l1][j1].minna*Bf[l2][j2].minnb,Af[l1][j1].maxnb*Bf[l2][j2].maxna)<<endl;
+								continue;
+							}
+							else
+							{
+								cout<<Af[l1][j1].minna*Bf[l2][j2].minnb<<endl;
+								continue;
+							}
+						}
+						else
+						{
+							cout<<Af[l1][j1].maxnb*Bf[l2][j2].maxna<<endl;
+							continue;
+						}
+					}
+				}
+				else
+				{
+					if(Af[l1][j1].zhen)
+					{
+						cout<<Af[l1][j1].maxna*Bf[l2][j2].minna<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].ling)
+						{
+							cout<<"0"<<endl;
+							continue;
+						}
+						else
+						{
+							cout<<Af[l1][j1].maxnb*Bf[l1][j2].maxna<<endl;
+							continue;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(Bf[l2][j2].fu)
+			{
+				if(Bf[l2][j2].ling)
+				{
+					if(Af[l1][j1].ling)
+					{
+						cout<<"0"<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].fu)
+						{
+							cout<<"0"<<endl;
+							continue;
+						}
+						else
+						{
+							cout<<Af[l1][j1].minna*Bf[l2][j2].minnb<<endl;
+							continue;
+						}
+					}
+				}
+				else
+				{
+					if(Af[l1][j1].fu)
+					{
+						cout<<Af[l1][j1].minnb*Bf[l2][j2].maxnb<<endl;
+						continue;
+					}
+					else
+					{
+						if(Af[l1][j1].ling)
+						{
+							cout<<"0"<<endl;
+							continue;
+						}
+						else
+						{
+							cout<<Af[l1][j1].minna*Bf[l2][j2].minnb<<endl;
+							continue;
+						}
+					}
+				}
+			}
+			else
+			{
+				cout<<"0"<<endl;
+				continue;
+			}
+		}
+	}
+	return 0;
+}
